@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.SequenceInputStream;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 import javax.swing.*;
 
@@ -179,6 +180,17 @@ public class ID3tags extends JFrame {
     private static JButton stopTrack_8;
     private static JButton stopTrack_9;
     private static JButton stopTrack_10;
+    private String Track1;
+    private String Track2;
+    private String Track3;
+    private String Track4;
+    private String Track5;
+    private String Track6;
+    private String Track7;
+    private String Track8;
+    private String Track9;
+    private String Track10;
+    private String[] info;
     private JLabel tracksRecorded;
     JCheckBox track1chk;
     JCheckBox track2chk;
@@ -193,6 +205,8 @@ public class ID3tags extends JFrame {
     private int tracksSelected = 0;
     private int trackChosen;
     private int firstTrack = 0;
+    static AudioSplitter g = new AudioSplitter();
+    private static String recordedName = g.getAlbumName();
 
     //private static MediaPlayer mediaPlayer;
     private static Boolean playingTrack = false;
@@ -202,6 +216,9 @@ public class ID3tags extends JFrame {
         setPreferredSize(new Dimension(990, 560));
         setTitle("ID3 Tag");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        createInfoFile();
+        readInfoFile();
 
         panelID3 = new JPanel();
         setContentPane(panelID3);
@@ -936,7 +953,135 @@ public class ID3tags extends JFrame {
         textAlbumArtist_10.setBounds(800, 435, 84, 30);
         panelID3.add(textAlbumArtist_10);
 
+        File directory = new File(recordedName);
+        trackQuantity = directory.list().length - 1;
+        for (int count = 1; count <= trackQuantity; count++) {
+            switch (count)
+            {
+                case 1:
+                    textArtist.setText(info[0]);
+                    textTitle.setText(info[1]);
+                    textAlbum.setText(info[2]);
+                    textYear.setText(info[3]);
+                    textComment.setText(info[4]);
+                    textComposer.setText(info[5]);
+                    textPublisher.setText(info[6]);
+                    textOriginalArtist.setText(info[7]);
+                    textAlbumArtist.setText(info[8]);
+                    break;
 
+                case 2:
+                    textArtist_2.setText(info[9]);
+                    textTitle_2.setText(info[10]);
+                    textAlbum_2.setText(info[11]);
+                    textYear_2.setText(info[12]);
+                    textComment_2.setText(info[13]);
+                    textComposer_2.setText(info[14]);
+                    textPublisher_2.setText(info[15]);
+                    textOriginalArtist_2.setText(info[16]);
+                    textAlbumArtist_2.setText(info[17]);
+                    break;
+
+                case 3:
+                    textArtist_3.setText(info[18]);
+                    textTitle_3.setText(info[19]);
+                    textAlbum_3.setText(info[20]);
+                    textYear_3.setText(info[21]);
+                    textComment_3.setText(info[22]);
+                    textComposer_3.setText(info[23]);
+                    textPublisher_3.setText(info[24]);
+                    textOriginalArtist_3.setText(info[25]);
+                    textAlbumArtist_3.setText(info[26]);
+                    break;
+
+                case 4:
+                    textArtist_4.setText(info[27]);
+                    textTitle_4.setText(info[28]);
+                    textAlbum_4.setText(info[29]);
+                    textYear_4.setText(info[30]);
+                    textComment_4.setText(info[31]);
+                    textComposer_4.setText(info[32]);
+                    textPublisher_4.setText(info[33]);
+                    textOriginalArtist_4.setText(info[34]);
+                    textAlbumArtist_4.setText(info[35]);
+                    break;
+
+                case 5:
+                    textArtist_5.setText(info[36]);
+                    textTitle_5.setText(info[37]);
+                    textAlbum_5.setText(info[38]);
+                    textYear_5.setText(info[39]);
+                    textComment_5.setText(info[40]);
+                    textComposer_5.setText(info[41]);
+                    textPublisher_5.setText(info[42]);
+                    textOriginalArtist_5.setText(info[43]);
+                    textAlbumArtist_5.setText(info[44]);
+                    break;
+
+                case 6:
+                    textArtist_6.setText(info[45]);
+                    textTitle_6.setText(info[46]);
+                    textAlbum_6.setText(info[47]);
+                    textYear_6.setText(info[48]);
+                    textComment_6.setText(info[49]);
+                    textComposer_6.setText(info[50]);
+                    textPublisher_6.setText(info[51]);
+                    textOriginalArtist_6.setText(info[52]);
+                    textAlbumArtist_6.setText(info[53]);
+                    break;
+
+                case 7:
+                    textArtist_7.setText(info[54]);
+                    textTitle_7.setText(info[55]);
+                    textAlbum_7.setText(info[56]);
+                    textYear_7.setText(info[57]);
+                    textComment_7.setText(info[58]);
+                    textComposer_7.setText(info[59]);
+                    textPublisher_7.setText(info[60]);
+                    textOriginalArtist_7.setText(info[61]);
+                    textAlbumArtist_7.setText(info[62]);
+                    break;
+
+                case 8:
+                    textArtist_8.setText(info[63]);
+                    textTitle_8.setText(info[64]);
+                    textAlbum_8.setText(info[65]);
+                    textYear_8.setText(info[66]);
+                    textComment_8.setText(info[67]);
+                    textComposer_8.setText(info[68]);
+                    textPublisher_8.setText(info[69]);
+                    textOriginalArtist_8.setText(info[70]);
+                    textAlbumArtist_8.setText(info[71]);
+                    break;
+
+                case 9:
+                    textArtist_9.setText(info[72]);
+                    textTitle_9.setText(info[73]);
+                    textAlbum_9.setText(info[74]);
+                    textYear_9.setText(info[75]);
+                    textComment_9.setText(info[76]);
+                    textComposer_9.setText(info[77]);
+                    textPublisher_9.setText(info[78]);
+                    textOriginalArtist_9.setText(info[79]);
+                    textAlbumArtist_9.setText(info[80]);
+                    break;
+
+                case 10:
+                    textArtist_10.setText(info[81]);
+                    textTitle_10.setText(info[82]);
+                    textAlbum_10.setText(info[83]);
+                    textYear_10.setText(info[84]);
+                    textComment_10.setText(info[85]);
+                    textComposer_10.setText(info[86]);
+                    textPublisher_10.setText(info[87]);
+                    textOriginalArtist_10.setText(info[88]);
+                    textAlbumArtist_10.setText(info[89]);
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
         tracksRecorded = new JLabel("Tracks Recorded: " + trackQuantity);
         tracksRecorded.setBounds(44, 482, 118, 14);
@@ -950,10 +1095,7 @@ public class ID3tags extends JFrame {
         playTrack_1.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[1] + ".mp3";
                 disablePlay();
                 stopTrack_1.setEnabled(true);
                 playMusic(playTrack);
@@ -966,10 +1108,7 @@ public class ID3tags extends JFrame {
         playTrack_2.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle_2.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_2.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_2.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[10] + ".mp3";
                 disablePlay();
                 stopTrack_2.setEnabled(true);
                 playMusic(playTrack);
@@ -982,10 +1121,7 @@ public class ID3tags extends JFrame {
         playTrack_3.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle_3.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_3.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_3.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[19] + ".mp3";
                 disablePlay();
                 stopTrack_3.setEnabled(true);
                 playMusic(playTrack);
@@ -998,10 +1134,7 @@ public class ID3tags extends JFrame {
         playTrack_4.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle_4.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_4.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_4.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[28] + ".mp3";
                 disablePlay();
                 stopTrack_4.setEnabled(true);
                 playMusic(playTrack);
@@ -1014,10 +1147,7 @@ public class ID3tags extends JFrame {
         playTrack_5.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle_5.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_5.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_5.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[37] + ".mp3";
                 disablePlay();
                 stopTrack_5.setEnabled(true);
                 playMusic(playTrack);
@@ -1030,10 +1160,7 @@ public class ID3tags extends JFrame {
         playTrack_6.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle_6.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_6.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_6.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[46] + ".mp3";
                 disablePlay();
                 stopTrack_6.setEnabled(true);
                 playMusic(playTrack);
@@ -1046,10 +1173,7 @@ public class ID3tags extends JFrame {
         playTrack_7.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle_7.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_7.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_7.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[55] + ".mp3";
                 disablePlay();
                 stopTrack_7.setEnabled(true);
                 playMusic(playTrack);
@@ -1062,10 +1186,7 @@ public class ID3tags extends JFrame {
         playTrack_8.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_8.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle_8.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_8.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_8.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[64] + ".mp3";
                 disablePlay();
                 stopTrack_8.setEnabled(true);
                 playMusic(playTrack);
@@ -1078,10 +1199,7 @@ public class ID3tags extends JFrame {
         playTrack_9.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_9.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle_9.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_9.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_9.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[73] + ".mp3";
                 disablePlay();
                 stopTrack_9.setEnabled(true);
                 playMusic(playTrack);
@@ -1094,10 +1212,7 @@ public class ID3tags extends JFrame {
         playTrack_10.setIcon(new ImageIcon(ID3tags.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
         playTrack_10.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle_10.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_10.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_10.mp3";
-                }
+                String playTrack = recordedName + "\\" + info[82] + ".mp3";
                 disablePlay();
                 stopTrack_10.setEnabled(true);
                 playMusic(playTrack);
@@ -1252,9 +1367,9 @@ public class ID3tags extends JFrame {
         panelID3.add(track10chk);
 
         AudioSplitter s = new AudioSplitter();
-        File directory = new File(s.getAlbumName());
+        directory = new File(recordedName);
         trackQuantity = directory.list().length;
-        for (int count = trackQuantity + 1; count <= 10; count++) {
+        for (int count = trackQuantity; count <= 10; count++) {
             switch (count)
             {
 
@@ -1410,10 +1525,14 @@ public class ID3tags extends JFrame {
                     else{
                         firstTag = true;
                     }
-
-                    for (trackPosition = 1; trackPosition <= trackQuantity; trackPosition++) {
-                        addID3tags();
+                    int temp = 1;
+                    for (trackPosition = 1; trackPosition <= trackQuantity - 1; trackPosition++) {
+                        addID3tags(temp);
+                        temp += 9;
                     }
+                    //createInfoFile();
+                    saveInfoFile();
+
                     //setID3tag(textTrackNumber.getText(),textArtist.getText(),textAlbum.getText(),textYear.getText(),textComposer.getText(),textPublisher.getText(),textOriginalArtist.getText(),textAlbumArtist.getText());
                     //if(firstTag == true){
                     //	saveID3tag(textArtist.getText(),textAlbum.getText(),textYear.getText(),textComposer.getText(),textPublisher.getText(),textOriginalArtist.getText(),textAlbumArtist.getText());
@@ -1488,9 +1607,9 @@ public class ID3tags extends JFrame {
         stopTrack_1.setEnabled(false);
         stopTrack_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_1.setEnabled(false);
                 enablePlay();
@@ -1504,9 +1623,9 @@ public class ID3tags extends JFrame {
         stopTrack_2.setEnabled(false);
         stopTrack_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_2.setEnabled(false);
                 enablePlay();
@@ -1520,9 +1639,9 @@ public class ID3tags extends JFrame {
         stopTrack_3.setEnabled(false);
         stopTrack_3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_3.setEnabled(false);
                 enablePlay();
@@ -1536,9 +1655,9 @@ public class ID3tags extends JFrame {
         stopTrack_4.setEnabled(false);
         stopTrack_4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_4.setEnabled(false);
                 enablePlay();
@@ -1552,9 +1671,9 @@ public class ID3tags extends JFrame {
         stopTrack_5.setEnabled(false);
         stopTrack_5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_5.setEnabled(false);
                 enablePlay();
@@ -1568,9 +1687,9 @@ public class ID3tags extends JFrame {
         stopTrack_6.setEnabled(false);
         stopTrack_6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_6.setEnabled(false);
                 enablePlay();
@@ -1584,9 +1703,9 @@ public class ID3tags extends JFrame {
         stopTrack_7.setEnabled(false);
         stopTrack_7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_7.setEnabled(false);
                 enablePlay();
@@ -1600,9 +1719,9 @@ public class ID3tags extends JFrame {
         stopTrack_8.setEnabled(false);
         stopTrack_8.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_8.setEnabled(false);
                 enablePlay();
@@ -1616,9 +1735,9 @@ public class ID3tags extends JFrame {
         stopTrack_9.setEnabled(false);
         stopTrack_9.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_9.setEnabled(false);
                 enablePlay();
@@ -1632,9 +1751,9 @@ public class ID3tags extends JFrame {
         stopTrack_10.setEnabled(false);
         stopTrack_10.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = v.getAlbumName() + "\\" + textTitle.getText() + ".mp3";
-                if (playTrack != v.getAlbumName() + "\\TRACK_1.mp3") {
-                    playTrack = v.getAlbumName() + "\\TRACK_1.mp3";
+                String playTrack = recordedName + "\\" + textTitle.getText() + ".mp3";
+                if (playTrack != recordedName + "\\TRACK_1.mp3") {
+                    playTrack = recordedName + "\\TRACK_1.mp3";
                 }
                 stopTrack_10.setEnabled(false);
                 enablePlay();
@@ -1647,7 +1766,7 @@ public class ID3tags extends JFrame {
 
         CopyTags.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                for (int count = 1; count <= trackQuantity; count++) {
+                for (int count = 1; count <= trackQuantity - 1; count++) {
                     switch (count)
                     {
 
@@ -1748,123 +1867,16 @@ public class ID3tags extends JFrame {
                 }
             }
         });
-
-        btnPreviousTrack = new JButton("Previous Track");
-        btnPreviousTrack.setFont(new Font("Arial", Font.PLAIN, 20));
-        btnPreviousTrack.setEnabled(false);
-        btnPreviousTrack.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                btnNextTrack.setEnabled(true);
-
-                the_trackNumber -= 1;
-
-                if(firstTag==false) {
-                    copyID3tag();
-                }
-
-                trackPosition -= 1;
-
-                if(trackPosition == 1) {
-                    btnPreviousTrack.setEnabled(false);
-                    btnLoadID3tag.setEnabled(true);
-                }
-                else{
-                    btnLoadID3tag.setEnabled(false);
-                }
-
-
-                lblOutputTrackNumber.setText("This is Track " + trackPosition);
-            }
-        });
-        //panelID3.add(btnPreviousTrack);
-
-        btnNextTrack = new JButton("Next Track");
-        btnNextTrack.setFont(new Font("Arial", Font.PLAIN, 20));
-        if(trackQuantity == 1){
-            btnNextTrack.setEnabled(false);
-        }
-        else {
-            btnNextTrack.setEnabled(true);
-        }
-        btnNextTrack.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                btnPreviousTrack.setEnabled(true);
-
-                the_trackNumber += 1;
-
-                if(firstTag==false) {
-                    copyID3tag();
-                }
-
-                trackPosition += 1;
-
-                if(trackPosition == trackQuantity) {
-                    btnNextTrack.setEnabled(false);
-                }
-
-                if(trackPosition == 1) {
-                    btnLoadID3tag.setEnabled(true);
-                }
-                else{
-                    btnLoadID3tag.setEnabled(false);
-                }
-
-                lblOutputTrackNumber.setText("This is Track_" + trackPosition);
-            }
-        });
-        //panelID3.add(btnNextTrack);
-
-        btnSaveID3tag = new JButton("Add ID3 tag");
-        btnSaveID3tag.setFont(new Font("Arial", Font.PLAIN, 20));
-        btnSaveID3tag.setEnabled(true);
-        btnSaveID3tag.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                try {
-
-                    File f = new File("ID3tag.txt");
-                    if(f.exists() && !f.isDirectory()) {
-
-                    }
-                    else{
-                        firstTag = true;
-                    }
-
-                    addID3tags();
-                    setID3tag(textTrackNumber.getText(),textArtist.getText(),textAlbum.getText(),textYear.getText(),textComposer.getText(),textPublisher.getText(),textOriginalArtist.getText(),textAlbumArtist.getText());
-                    if(firstTag == true){
-                        saveID3tag(textArtist.getText(),textAlbum.getText(),textYear.getText(),textComposer.getText(),textPublisher.getText(),textOriginalArtist.getText(),textAlbumArtist.getText());
-                        firstTag = false;
-                    }
-                    JOptionPane.showMessageDialog(null, "Successful! \n Reminder: The content of the saved file is fixed. If you want to update the content of the file, please delete the ID3tag.txt file before you want to save a new one.", "Message", JOptionPane.INFORMATION_MESSAGE);
-
-                } catch (UnsupportedTagException | InvalidDataException | NotSupportedException | IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        });
-        //panelID3.add(btnSaveID3tag);
-
-        btnLoadID3tag = new JButton("Load ID3 tag");
-        btnLoadID3tag.setFont(new Font("Arial", Font.PLAIN, 20));
-        btnLoadID3tag.setEnabled(true);
-        btnLoadID3tag.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                loadID3tag();
-            }
-        });
-        ///panelID3.add(btnLoadID3tag);
-
     }
 
     public int getTrackNumber(){
         return the_trackNumber;
     }
 
-    public void addID3tags() throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException {
+    public void addID3tags(int num) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException {
 //		Mp3File mp3file = new Mp3File("output\\TRACK_" + trackPosition + ".mp3");
         AudioSplitter s = new AudioSplitter();
-        Mp3File mp3file = new Mp3File(s.getAlbumName() + "/TRACK_" + trackPosition + ".mp3");
+        Mp3File mp3file = new Mp3File(recordedName + "\\" + info[num] + ".mp3");
         ID3v2 id3v2Tag;
         if (mp3file.hasId3v2Tag()) {
 //		  id3v2Tag = mp3file.getId3v2Tag();
@@ -1890,7 +1902,15 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle.getText() + ".mp3");
+                String check = info[1];
+                String check2 = textTitle.getText();
+                System.out.println(info[1]);
+                System.out.println(textTitle.getText());
+                if (check != check2) {
+                    mp3file.save(recordedName + "/" + textTitle.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[1] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
 
             case 2:
@@ -1904,7 +1924,11 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_2.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_2.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_2.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle_2.getText() + ".mp3");
+                if (textTitle_2.getText() != info[10]) {
+                    mp3file.save(recordedName + "/" + textTitle_2.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[10] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
 
             case 3:
@@ -1918,7 +1942,11 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_3.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_3.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_3.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle_3.getText() + ".mp3");
+                if (textTitle_3.getText() != info[19]) {
+                    mp3file.save(recordedName + "/" + textTitle_3.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[19] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
 
             case 4:
@@ -1932,7 +1960,11 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_4.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_4.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_4.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle_4.getText() + ".mp3");
+                if (textTitle_2.getText() != info[28]) {
+                    mp3file.save(recordedName + "/" + textTitle_4.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[28] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
 
             case 5:
@@ -1946,7 +1978,11 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_5.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_5.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_5.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle_5.getText() + ".mp3");
+                if (textTitle_2.getText() != info[37]) {
+                    mp3file.save(recordedName + "/" + textTitle_5.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[37] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
 
             case 6:
@@ -1960,7 +1996,11 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_6.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_6.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_6.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle_6.getText() + ".mp3");
+                if (textTitle_2.getText() != info[46]) {
+                    mp3file.save(recordedName + "/" + textTitle_6.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[46] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
 
             case 7:
@@ -1974,7 +2014,11 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_7.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_7.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_7.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle_7.getText() + ".mp3");
+                if (textTitle_2.getText() != info[55]) {
+                    mp3file.save(recordedName + "/" + textTitle_7.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[55] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
 
             case 8:
@@ -1988,7 +2032,11 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_8.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_8.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_8.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle_8.getText() + ".mp3");
+                if (textTitle_2.getText() != info[64]) {
+                    mp3file.save(recordedName + "/" + textTitle_8.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[64] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
 
             case 9:
@@ -2002,7 +2050,11 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_9.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_9.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_9.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle_9.getText() + ".mp3");
+                if (textTitle_2.getText() != info[73]) {
+                    mp3file.save(recordedName + "/" + textTitle_9.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[73] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
 
             case 10:
@@ -2016,7 +2068,11 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_10.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_10.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_10.getText());
-                mp3file.save(s.getAlbumName() + "/" + textTitle_10.getText() + ".mp3");
+                if (textTitle_2.getText() != info[82]) {
+                    mp3file.save(recordedName + "/" + textTitle_10.getText() + ".mp3");
+                    File cleanFile = new File(recordedName + "\\" + info[82] + ".mp3");
+                    boolean a = cleanFile.delete();
+                }
                 break;
         }
     }
@@ -2097,9 +2153,9 @@ public class ID3tags extends JFrame {
 
     public void refresh() {
         AudioSplitter s = new AudioSplitter();
-        File directory = new File(s.getAlbumName());
+        File directory = new File(recordedName);
         trackQuantity = directory.list().length;
-        tracksRecorded.setText("Tracks Recorded: " + trackQuantity);
+        tracksRecorded.setText("Tracks Recorded: " + (trackQuantity - 1));
         for (int count = trackQuantity + 1; count <= 10; count++) {
             switch (count)
             {
@@ -2332,9 +2388,9 @@ public class ID3tags extends JFrame {
 
     public void rearrangeTrack(int trackChosen) {
         AudioSplitter s = new AudioSplitter();
-        File directory = new File(s.getAlbumName());
+        File directory = new File(recordedName);
         int quantity = directory.list().length;
-        for (int i = trackChosen + 2; i <= quantity + 1; i++) {
+        for (int i = trackChosen + 2; i <= quantity; i++) {
             File f1 = new File(s.getAlbumName() + "\\TRACK_" + i + ".mp3");
             int temp = i-1;
             File f2 = new File(s.getAlbumName() + "\\TRACK_" + temp + ".mp3");
@@ -2349,9 +2405,9 @@ public class ID3tags extends JFrame {
 
     public static void enablePlay() {
         AudioSplitter s = new AudioSplitter();
-        File directory = new File(s.getAlbumName());
+        File directory = new File(recordedName);
         trackQuantity = directory.list().length;
-        for (int count = 1; count <= trackQuantity; count++) {
+        for (int count = 1; count <= trackQuantity - 1; count++) {
             switch (count)
             {
 
@@ -2404,9 +2460,9 @@ public class ID3tags extends JFrame {
 
     public void disablePlay() {
         AudioSplitter s = new AudioSplitter();
-        File directory = new File(s.getAlbumName());
+        File directory = new File(recordedName);
         trackQuantity = directory.list().length;
-        for (int count = 1; count <= trackQuantity; count++) {
+        for (int count = 1; count <= trackQuantity - 1; count++) {
             switch (count)
             {
 
@@ -2454,6 +2510,161 @@ public class ID3tags extends JFrame {
                 default:
                     break;
             }
+        }
+    }
+
+    public void createInfoFile(){
+        //AudioSplitter v = new AudioSplitter();
+        try {
+            File myObj = new File(recordedName + "\\trackInfo.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+                FileWriter myWriter = new FileWriter(recordedName + "\\trackInfo.txt");
+                File directory = new File(recordedName);
+                trackQuantity = directory.list().length - 1;
+                System.out.println(trackQuantity);
+                for (int i = 1; i <= trackQuantity; i++) {
+                    myWriter.write("Artist," + "TRACK_" + i + "," + "Album," + "Year," + "Comment," + "Composer," + "Publisher," + "OriginalArtist," + "OriginalAlbum,");
+                }
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public void saveInfoFile(){
+        //AudioSplitter v = new AudioSplitter();
+        try {
+            FileWriter myWriter = new FileWriter(recordedName + "\\trackInfo.txt");
+            File directory = new File(recordedName);
+            trackQuantity = directory.list().length - 1;
+            for (int i = 1; i <= trackQuantity; i++) {
+                switch(i) {
+
+                    case 1:
+                        myWriter.write(textArtist.getText() + "," + textTitle.getText() + "," + textAlbum.getText() + "," + textYear.getText() + "," + textComment.getText() + "," + textComposer.getText() + "," + textPublisher.getText() + "," + textOriginalArtist.getText() + "," + textAlbumArtist.getText() + "," );
+                        break;
+
+                    case 2:
+                        myWriter.write(textArtist_2.getText() + "," + textTitle_2.getText() + "," + textAlbum_2.getText() + "," + textYear_2.getText() + "," + textComment_2.getText() + "," + textComposer_2.getText() + "," + textPublisher_2.getText() + "," + textOriginalArtist_2.getText() + "," + textAlbumArtist_2.getText() + "," );
+                        break;
+
+                    case 3:
+                        myWriter.write(textArtist_3.getText() + "," + textTitle_3.getText() + "," + textAlbum_3.getText() + "," + textYear_3.getText() + "," + textComment_3.getText() + "," + textComposer_3.getText() + "," + textPublisher_3.getText() + "," + textOriginalArtist_3.getText() + "," + textAlbumArtist_3.getText() + "," );
+                        break;
+
+                    case 4:
+                        myWriter.write(textArtist_4.getText() + "," + textTitle_4.getText() + "," + textAlbum_4.getText() + "," + textYear_4.getText() + "," + textComment_4.getText() + "," + textComposer_4.getText() + "," + textPublisher_4.getText() + "," + textOriginalArtist_4.getText() + "," + textAlbumArtist_4.getText() + "," );
+                        break;
+
+                    case 5:
+                        myWriter.write(textArtist_5.getText() + "," + textTitle_5.getText() + "," + textAlbum_5.getText() + "," + textYear_5.getText() + "," + textComment_5.getText() + "," + textComposer_5.getText() + "," + textPublisher_5.getText() + "," + textOriginalArtist_5.getText() + "," + textAlbumArtist_5.getText() + "," );
+                        break;
+
+                    case 6:
+                        myWriter.write(textArtist_6.getText() + "," + textTitle_6.getText() + "," + textAlbum_6.getText() + "," + textYear_6.getText() + "," + textComment_6.getText() + "," + textComposer_6.getText() + "," + textPublisher_6.getText() + "," + textOriginalArtist_6.getText() + "," + textAlbumArtist_6.getText() + "," );
+                        break;
+
+                    case 7:
+                        myWriter.write(textArtist_7.getText() + "," + textTitle_7.getText() + "," + textAlbum_7.getText() + "," + textYear_7.getText() + "," + textComment_7.getText() + "," + textComposer_7.getText() + "," + textPublisher_7.getText() + "," + textOriginalArtist_7.getText() + "," + textAlbumArtist_7.getText() + "," );
+                        break;
+
+                    case 8:
+                        myWriter.write(textArtist_8.getText() + "," + textTitle_8.getText() + "," + textAlbum_8.getText() + "," + textYear_8.getText() + "," + textComment_8.getText() + "," + textComposer_8.getText() + "," + textPublisher_8.getText() + "," + textOriginalArtist_8.getText() + "," + textAlbumArtist_8.getText() + "," );
+                        break;
+
+                    case 9:
+                        myWriter.write(textArtist_9.getText() + "," + textTitle_9.getText() + "," + textAlbum_9.getText() + "," + textYear_9.getText() + "," + textComment_9.getText() + "," + textComposer_9.getText() + "," + textPublisher_9.getText() + "," + textOriginalArtist_9.getText() + "," + textAlbumArtist_9.getText() + "," );
+                        break;
+
+                    case 10:
+                        myWriter.write(textArtist_10.getText() + "," + textTitle_10.getText() + "," + textAlbum_10.getText() + "," + textYear_10.getText() + "," + textComment_10.getText() + "," + textComposer_10.getText() + "," + textPublisher_10.getText() + "," + textOriginalArtist_10.getText() + "," + textAlbumArtist_10.getText() + "," );
+                        break;
+                }
+            }
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+    }
+
+    public void readInfoFile(){
+        try {
+            File myObj = new File(recordedName + "\\trackInfo.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String nodeValue = data;
+                info = nodeValue.split(",");
+                File directory = new File(recordedName);
+                trackQuantity = directory.list().length - 1;
+                for (int i = 1; i <= trackQuantity; i++) {
+                    switch(i) {
+
+                        case 1:
+                        Track1 = info[1];
+                            System.out.println(Track1);
+                        break;
+
+                        case 2:
+                        Track2 = info[10];
+                            System.out.println(Track2);
+                        break;
+
+                        case 3:
+                        Track3 = info[19];
+                            System.out.println(Track3);
+                        break;
+
+                        case 4:
+                            Track4 = info[28];
+                            System.out.println(Track3);
+                            break;
+
+                        case 5:
+                            Track5 = info[37];
+                            System.out.println(Track3);
+                            break;
+
+                        case 6:
+                            Track6 = info[46];
+                            System.out.println(Track3);
+                            break;
+
+                        case 7:
+                            Track7 = info[55];
+                            System.out.println(Track3);
+                            break;
+
+                        case 8:
+                            Track8 = info[64];
+                            System.out.println(Track3);
+                            break;
+
+                        case 9:
+                            Track9 = info[73];
+                            System.out.println(Track3);
+                            break;
+
+                        case 10:
+                            Track10 = info[82];
+                            System.out.println(Track3);
+                            break;
+                    }
+                    }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }

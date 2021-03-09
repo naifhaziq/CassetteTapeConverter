@@ -11,12 +11,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -149,6 +152,9 @@ public class AudioSplitter extends JFrame {
                     AudioSplitter frame = new AudioSplitter();
                     frame.pack();
                     frame.setVisible(true);
+                    createSettings();
+                    //writeSettings();
+                    readSettings();
 
 //					frame.cleanOldFiles(DEFAULT_TRACK_FILE + "_");
 //					frame.cleanOldFiles(OUTPUT_FOLDER + File.separator + DEFAULT_TRACK_FILE + "_");
@@ -334,10 +340,11 @@ public class AudioSplitter extends JFrame {
         subNoise.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 noiseReduction = (String) JOptionPane.showInputDialog(null, "Noise Reduction Value", "Settings", JOptionPane.INFORMATION_MESSAGE,null,null,noiseReduction);;
+                writeSettings();
                 if (noiseReduction == null) {
-                    noiseReduction = "0.1";
+                    readSettings();
                 }
-
+                writeSettings();
             }
         });
 
@@ -345,9 +352,11 @@ public class AudioSplitter extends JFrame {
         subStop.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 stopDuration = (String) JOptionPane.showInputDialog(null, "Stop Duration", "Settings", JOptionPane.INFORMATION_MESSAGE,null,null,stopDuration);;
+                writeSettings();
                 if (stopDuration == null) {
-                    stopDuration = "20";
+                    readSettings();
                 }
+                writeSettings();
             }
         });
 
@@ -356,8 +365,9 @@ public class AudioSplitter extends JFrame {
             public void actionPerformed(ActionEvent event) {
                 threshold = (String) JOptionPane.showInputDialog(null, "Threshold Value(Higher value -> More Tracks)", "Settings", JOptionPane.INFORMATION_MESSAGE,null,null,threshold);;
                 if (threshold == null) {
-                    threshold = "-70";
+                    readSettings();
                 }
+                writeSettings();
             }
         });
 
@@ -1209,6 +1219,56 @@ public class AudioSplitter extends JFrame {
             });
         }
 
+    }
+
+    public static void createSettings() {
+        try {
+            File myObj = new File("settings.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+                FileWriter myWriter = new FileWriter("settings.txt");
+                myWriter.write(noiseReduction + " " + stopDuration + " " + threshold);
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeSettings() {
+        try {
+            FileWriter myWriter = new FileWriter("settings.txt");
+            myWriter.write(noiseReduction + " " + stopDuration + " " + threshold);
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void readSettings() {
+        try {
+            File myObj = new File("settings.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+                String nodeValue = data;
+                String[] settings = nodeValue.split(" ");
+                noiseReduction = settings[0];
+                stopDuration = settings[1];
+                threshold = settings[2];
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }
 
