@@ -54,7 +54,7 @@ public class ID3tags extends JFrame {
     private JPanel panelID3;
 
     private int trackPosition = 1;
-    private int trackQuantity = AudioSplitter.getTrackCount()-1;
+    private static int trackQuantity = AudioSplitter.getTrackCount()-1;
 
     private String the_trackNo;
     private String the_artist;
@@ -159,26 +159,26 @@ public class ID3tags extends JFrame {
     private JTextField textPublisher_10;
     private JTextField textOriginalArtist_10;
     private JTextField textAlbumArtist_10;
-    private JButton playTrack_1;
-    private JButton playTrack_2;
-    private JButton playTrack_3;
-    private JButton playTrack_4;
-    private JButton playTrack_5;
-    private JButton playTrack_6;
-    private JButton playTrack_7;
-    private JButton playTrack_8;
-    private JButton playTrack_9;
-    private JButton playTrack_10;
-    private JButton stopTrack_1;
-    private JButton stopTrack_2;
-    private JButton stopTrack_3;
-    private JButton stopTrack_4;
-    private JButton stopTrack_5;
-    private JButton stopTrack_6;
-    private JButton stopTrack_7;
-    private JButton stopTrack_8;
-    private JButton stopTrack_9;
-    private JButton stopTrack_10;
+    private static JButton playTrack_1;
+    private static JButton playTrack_2;
+    private static JButton playTrack_3;
+    private static JButton playTrack_4;
+    private static JButton playTrack_5;
+    private static JButton playTrack_6;
+    private static JButton playTrack_7;
+    private static JButton playTrack_8;
+    private static JButton playTrack_9;
+    private static JButton playTrack_10;
+    private static JButton stopTrack_1;
+    private static JButton stopTrack_2;
+    private static JButton stopTrack_3;
+    private static JButton stopTrack_4;
+    private static JButton stopTrack_5;
+    private static JButton stopTrack_6;
+    private static JButton stopTrack_7;
+    private static JButton stopTrack_8;
+    private static JButton stopTrack_9;
+    private static JButton stopTrack_10;
     private JLabel tracksRecorded;
     JCheckBox track1chk;
     JCheckBox track2chk;
@@ -2068,12 +2068,29 @@ public class ID3tags extends JFrame {
     public static void playMusic(String playTrack) {
         if (playingTrack == true) {
             mediaPlayer.stop();
+            mediaPlayer.dispose();
             playingTrack = false;
         } else {
             playingTrack = true;
             Media go = new Media(Paths.get(playTrack).toUri().toString());
             mediaPlayer = new MediaPlayer(go);
             mediaPlayer.play();
+            mediaPlayer.setOnEndOfMedia(() -> {
+                enablePlay();
+                stopTrack_1.setEnabled(false);
+                stopTrack_2.setEnabled(false);
+                stopTrack_3.setEnabled(false);
+                stopTrack_4.setEnabled(false);
+                stopTrack_5.setEnabled(false);
+                stopTrack_6.setEnabled(false);
+                stopTrack_7.setEnabled(false);
+                stopTrack_8.setEnabled(false);
+                stopTrack_9.setEnabled(false);
+                stopTrack_10.setEnabled(false);
+                mediaPlayer.stop();
+                mediaPlayer.dispose();
+                playingTrack = false;
+            });
         }
 
     }
@@ -2330,7 +2347,7 @@ public class ID3tags extends JFrame {
 
     }
 
-    public void enablePlay() {
+    public static void enablePlay() {
         AudioSplitter s = new AudioSplitter();
         File directory = new File(s.getAlbumName());
         trackQuantity = directory.list().length;

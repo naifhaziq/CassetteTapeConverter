@@ -59,6 +59,7 @@ public class AudioSplitter extends JFrame {
     static BufferedImage img;
     static JPanel view;
     MediaPlayer.Status status = MediaPlayer.Status.UNKNOWN;
+    private static Boolean playingTrack = false;
 
     private JPanel contentPane;
     private JComboBox<Info> box;
@@ -89,12 +90,12 @@ public class AudioSplitter extends JFrame {
     private final static String DEFAULT_WAV_FILE = "Full_Audio.wav"; // File name of the full recording
     private final static String DEFAULT_WAV_FILE2 = "audio-clean.wav"; // File name of the full recording after noise reduction
     private final static String DEFAULT_TRACK_FILE = "TRACK"; // Prefix of each track audio
-    private final static String OUTPUT_FOLDER = JOptionPane.showInputDialog(null, "Please enter album name", "Album Name", JOptionPane.INFORMATION_MESSAGE);; // Prefix of each track audio
-    //private final static String OUTPUT_FOLDER = "output";
-    private static String recordedFolder = "output";
+    //private final static String OUTPUT_FOLDER = JOptionPane.showInputDialog(null, "Please enter album name", "Album Name", JOptionPane.INFORMATION_MESSAGE);; // Prefix of each track audio
+    private final static String OUTPUT_FOLDER = "output";
+    private static String recordedFolder = OUTPUT_FOLDER;
     private static String renameFolder;
     public String getAlbumName() {
-        return AudioSplitter.OUTPUT_FOLDER;
+        return AudioSplitter.recordedFolder;
     }
     private final static String DEFAULT_TRACK_EXT = "mp3"; // File extension of track audio
     private final static int FRAME_RATE = 44100; // Frame Rate of audio format
@@ -135,7 +136,7 @@ public class AudioSplitter extends JFrame {
     static int maximum = 0;
 
     private static DecimalFormat df2 = new DecimalFormat(".##");
-    private JButton btnPlay;
+    private static JButton btnPlay;
     private static JButton btnStopPlaying;
 
     /**
@@ -283,7 +284,7 @@ public class AudioSplitter extends JFrame {
         });
 
         subSave = new JMenuItem("Save");
-        subSave.setEnabled(false);
+        subSave.setEnabled(true);
         subSave.addActionListener(new ActionListener () {
             public void actionPerformed (ActionEvent event) {
                 renameFolder = JOptionPane.showInputDialog(null, "Please enter album name", "Album Name", JOptionPane.INFORMATION_MESSAGE);
@@ -362,7 +363,7 @@ public class AudioSplitter extends JFrame {
 
         //mbFile.add(subNew);
         //mbFile.add(subOpen);
-        //mbFile.add(subSave);
+        mbFile.add(subSave);
         mbFile.add(subExit);
         mbTracks.add(subID3tags);
         mbTracks.add(subReprocess);
@@ -532,8 +533,6 @@ public class AudioSplitter extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String playTrack = "audio-clean.wav";
                 playMusic(playTrack);
-                btnPlay.setEnabled(false);
-                enableStop();
             }
         });
         btnPlay.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -544,9 +543,8 @@ public class AudioSplitter extends JFrame {
         btnStopPlaying = new JButton("Stop Play");
         btnStopPlaying.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mediaPlayer.stop();
-                btnPlay.setEnabled(true);
-                btnStopPlaying.setEnabled(false);
+                String playTrack = "audio-clean.wav";
+                playMusic(playTrack);
             }
         });
         btnStopPlaying.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -583,7 +581,7 @@ public class AudioSplitter extends JFrame {
                 btnStart.setEnabled(false);
                 subReprocess.setEnabled(true);
                 btnPlay.setEnabled(true);
-                //subSave.setEnabled(true);
+                subSave.setEnabled(true);
                 subNew.setEnabled(true);
 
             }
@@ -1017,12 +1015,6 @@ public class AudioSplitter extends JFrame {
 
     private static MediaPlayer mediaPlayer;
 
-    public static void playMusic(String playTrack) {
-        Media go = new Media(Paths.get(playTrack).toUri().toString());
-        mediaPlayer = new MediaPlayer(go);
-        mediaPlayer.play();
-    }
-
     static void enableStop() {
         btnStopPlaying.setEnabled(true);
     }
@@ -1192,6 +1184,31 @@ public class AudioSplitter extends JFrame {
     public void clear(Graphics g){
         super.paint(g);
         g.setColor(Color.WHITE);
+    }
+
+    public static void playMusic(String playTrack) {
+        if (playingTrack == true) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+            playingTrack = false;
+            btnStopPlaying.setEnabled(false);
+            btnPlay.setEnabled(true);
+        } else {
+            playingTrack = true;
+            Media go = new Media(Paths.get(playTrack).toUri().toString());
+            mediaPlayer = new MediaPlayer(go);
+            mediaPlayer.play();
+            btnStopPlaying.setEnabled(true);
+            btnPlay.setEnabled(false);
+            mediaPlayer.setOnEndOfMedia(() -> {
+                btnStopPlaying.setEnabled(false);
+                btnPlay.setEnabled(true);
+                mediaPlayer.stop();
+                mediaPlayer.dispose();
+                playingTrack = false;
+            });
+        }
+
     }
 }
 
