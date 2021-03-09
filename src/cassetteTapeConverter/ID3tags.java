@@ -17,14 +17,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.SequenceInputStream;
 import java.nio.file.Paths;
-import java.util.Timer;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.ID3v23Tag;
@@ -33,29 +27,15 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.NotSupportedException;
 import com.mpatric.mp3agic.UnsupportedTagException;
-import javax.swing.SwingConstants;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.embed.swing.JFXPanel;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
+
 public class ID3tags extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    private JLabel lblOutputTrackNumber;
-    private JLabel lblEmpty;
-    private JLabel lblTrackNumber;
-    private JLabel lblArtist;
-    private JLabel lblTitle;
-    private JLabel lblAlbum;
-    private JLabel lblYear;
-    private JLabel lblComment;
-    private JLabel lblComposer;
-    private JLabel lblPublisher;
-    private JLabel lblOriginalArtist;
-    private JLabel lblAlbumArtist;
     private JTextField textTrackNumber;
     private JTextField textArtist;
     private JTextField textTitle;
@@ -84,8 +64,6 @@ public class ID3tags extends JFrame {
     private String the_publisher;
     private String the_originalArtist;
     private String the_albumArtist;
-    private String track2play;
-
     private String filepath = "ID3tag.txt";
 
     private int the_trackNumber = 0;
@@ -309,6 +287,8 @@ public class ID3tags extends JFrame {
         lblAlbumArtist_1.setFont(new Font("Arial", Font.PLAIN, 15));
         panelID3.add(lblAlbumArtist_1);
 
+        AudioSplitter v = new AudioSplitter();
+
         textTrackNumber = new JTextField();
         textTrackNumber.setHorizontalAlignment(SwingConstants.CENTER);
         textTrackNumber.setBounds(44, 66, 84, 30);
@@ -333,7 +313,7 @@ public class ID3tags extends JFrame {
 
         textAlbum = new JTextField();
         textAlbum.setBounds(296, 66, 84, 30);
-        textAlbum.setText("");
+        textAlbum.setText(v.getAlbumName());
         textAlbum.setFont(new Font("Arial", Font.PLAIN, 11));
         panelID3.add(textAlbum);
         textAlbum.setColumns(20);
@@ -405,6 +385,7 @@ public class ID3tags extends JFrame {
         textAlbum_2.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_2.setColumns(10);
         textAlbum_2.setBounds(296, 107, 84, 30);
+        textAlbum_2.setText(v.getAlbumName());
         panelID3.add(textAlbum_2);
 
         textYear_2 = new JTextField();
@@ -468,6 +449,7 @@ public class ID3tags extends JFrame {
         textAlbum_3.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_3.setColumns(10);
         textAlbum_3.setBounds(296, 148, 84, 30);
+        textAlbum_3.setText(v.getAlbumName());
         panelID3.add(textAlbum_3);
 
         textYear_3 = new JTextField();
@@ -531,6 +513,7 @@ public class ID3tags extends JFrame {
         textAlbum_4.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_4.setColumns(10);
         textAlbum_4.setBounds(296, 189, 84, 30);
+        textAlbum_4.setText(v.getAlbumName());
         panelID3.add(textAlbum_4);
 
         textYear_4 = new JTextField();
@@ -594,6 +577,7 @@ public class ID3tags extends JFrame {
         textAlbum_5.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_5.setColumns(10);
         textAlbum_5.setBounds(296, 230, 84, 30);
+        textAlbum_5.setText(v.getAlbumName());
         panelID3.add(textAlbum_5);
 
         textYear_5 = new JTextField();
@@ -657,6 +641,7 @@ public class ID3tags extends JFrame {
         textAlbum_6.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_6.setColumns(10);
         textAlbum_6.setBounds(296, 271, 84, 30);
+        textAlbum_6.setText(v.getAlbumName());
         panelID3.add(textAlbum_6);
 
         textYear_6 = new JTextField();
@@ -720,6 +705,7 @@ public class ID3tags extends JFrame {
         textAlbum_7.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_7.setColumns(10);
         textAlbum_7.setBounds(296, 312, 84, 30);
+        textAlbum_7.setText(v.getAlbumName());
         panelID3.add(textAlbum_7);
 
         textYear_7 = new JTextField();
@@ -783,6 +769,7 @@ public class ID3tags extends JFrame {
         textAlbum_8.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_8.setColumns(10);
         textAlbum_8.setBounds(296, 353, 84, 30);
+        textAlbum_8.setText(v.getAlbumName());
         panelID3.add(textAlbum_8);
 
         textYear_8 = new JTextField();
@@ -846,6 +833,7 @@ public class ID3tags extends JFrame {
         textAlbum_9.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_9.setColumns(10);
         textAlbum_9.setBounds(296, 394, 84, 30);
+        textAlbum_9.setText(v.getAlbumName());
         panelID3.add(textAlbum_9);
 
         textYear_9 = new JTextField();
@@ -909,6 +897,7 @@ public class ID3tags extends JFrame {
         textAlbum_10.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_10.setColumns(10);
         textAlbum_10.setBounds(296, 435, 84, 30);
+        textAlbum_10.setText(v.getAlbumName());
         panelID3.add(textAlbum_10);
 
         textYear_10 = new JTextField();
@@ -947,7 +936,7 @@ public class ID3tags extends JFrame {
         textAlbumArtist_10.setBounds(800, 435, 84, 30);
         panelID3.add(textAlbumArtist_10);
 
-        AudioSplitter v = new AudioSplitter();
+
 
         tracksRecorded = new JLabel("Tracks Recorded: " + trackQuantity);
         tracksRecorded.setBounds(44, 482, 118, 14);
@@ -1441,11 +1430,6 @@ public class ID3tags extends JFrame {
         SaveTags.setBounds(548, 478, 89, 23);
         panelID3.add(SaveTags);
 
-        JLabel lblMergeSuccess = new JLabel("");
-        lblMergeSuccess.setHorizontalAlignment(SwingConstants.CENTER);
-        lblMergeSuccess.setBounds(380, 507, 168, 14);
-        panelID3.add(lblMergeSuccess);
-
         //MergeTracks merge = new MergeTracks(this);
         JButton btnMergeTracks = new JButton("Merge Tracks");
         btnMergeTracks.addActionListener(new ActionListener() {
@@ -1482,8 +1466,9 @@ public class ID3tags extends JFrame {
                 track10chk.setSelected(false);
                 lblRefreshInfo.setText("Tracks Selected: 0");
                 refresh();
-                lblMergeSuccess.setText("Success!");
-                lblMergeSuccess.setForeground(Color.BLUE);
+                JOptionPane.showMessageDialog(null, "Merging Completed", "Message", JOptionPane.INFORMATION_MESSAGE);
+                //lblMergeSuccess.setText("Success!");
+                //lblMergeSuccess.setForeground(Color.BLUE);
             }
         });
         btnMergeTracks.setBounds(380, 478, 168, 23);
@@ -1658,6 +1643,7 @@ public class ID3tags extends JFrame {
         });
         stopTrack_10.setBounds(934, 435, 30, 31);
         panelID3.add(stopTrack_10);
+
 
         CopyTags.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e) {
