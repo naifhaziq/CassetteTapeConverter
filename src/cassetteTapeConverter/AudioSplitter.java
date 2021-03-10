@@ -86,6 +86,7 @@ public class AudioSplitter extends JFrame {
     private JButton btnID3tags;
     private static JButton btnStop;
     private static boolean newTrack = false;
+    private static boolean savedAlbum = false;
 
     static JProgressBar pbar = new JProgressBar();
 
@@ -201,13 +202,24 @@ public class AudioSplitter extends JFrame {
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent evt){
-                int x = JOptionPane.showConfirmDialog(null,
-                        "Are you sure you want to exit?", "Warning!",
-                        JOptionPane.YES_NO_OPTION);
-                if(x == JOptionPane.YES_OPTION) {
-                    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                }else{
-                    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                if (!savedAlbum) {
+                    int x = JOptionPane.showConfirmDialog(null,
+                            "You have not saved yet!" + "\n" + "Are you sure you want to exit?", "Warning!",
+                            JOptionPane.YES_NO_OPTION);
+                    if (x == JOptionPane.YES_OPTION) {
+                        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    } else {
+                        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                    }
+                }
+                if (savedAlbum == true) {
+                    int x = JOptionPane.showConfirmDialog(null,
+                            "Are you sure you want to exit?", "Warning!",
+                            JOptionPane.YES_NO_OPTION);
+                    if (x == JOptionPane.YES_OPTION) {
+                        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    } else {
+                        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); }
                 }
             }
         });
@@ -251,28 +263,20 @@ public class AudioSplitter extends JFrame {
         });
         subNew.setEnabled(false);
 
-        /*JMenuItem subOpen = new JMenuItem("Open");
+        JMenuItem subOpen = new JMenuItem("Open");
         subOpen.addActionListener(new ActionListener () {
            public void actionPerformed(ActionEvent event){
-               JFileChooser chooser = new JFileChooser();
-               chooser.setCurrentDirectory(new java.io.File("."));
-               chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-               chooser.setAcceptAllFileFilterUsed(false);
-               if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                   recordedFolder = chooser.getCurrentDirectory();
-               }
-               //int val = chooser.showOpenDialog(null);
-               //if(val != JFileChooser.APPROVE_OPTION) {
-               //   return;
-        //}
+               recordedFolder = JOptionPane.showInputDialog(null, "Enter the name of the album", "Open", JOptionPane.INFORMATION_MESSAGE);
+               ID3tags frame2 = new ID3tags();
+               frame2.pack();
+               frame2.setVisible(true);
            }
-        });*/
+        });
 
         subID3tags = new JMenuItem("Naming the Tracks");
         subID3tags.setEnabled(true);
         subID3tags.addActionListener(new ActionListener () {
             public void actionPerformed(ActionEvent event) {
-
                 ID3tags frame2 = new ID3tags();
                 frame2.pack();
                 frame2.setVisible(true);
@@ -298,11 +302,12 @@ public class AudioSplitter extends JFrame {
                 File destFolder = new File(renameFolder);
 
                 if (sourceFolder.renameTo(destFolder)) {
-                    System.out.println("Folder renamed successfully");
+                    System.out.println("Album saved successfully");
                     JOptionPane.showMessageDialog(null, "Album saved!");
                     recordedFolder = renameFolder;
+                    savedAlbum = true;
                 } else {
-                    System.out.println("Failed to rename folder");
+                    System.out.println("Failed to save album");
                     JOptionPane.showMessageDialog(null, "Album failed to save");
                 }
 
@@ -311,7 +316,7 @@ public class AudioSplitter extends JFrame {
         });
 
         subReprocess = new JMenuItem("Reprocess");
-        subReprocess.setEnabled(false);
+        subReprocess.setEnabled(true);
         final AudioSplitter frame = this;
         subReprocess.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -372,7 +377,7 @@ public class AudioSplitter extends JFrame {
         });
 
         //mbFile.add(subNew);
-        //mbFile.add(subOpen);
+        mbFile.add(subOpen);
         mbFile.add(subSave);
         mbFile.add(subExit);
         mbTracks.add(subID3tags);
@@ -428,6 +433,7 @@ public class AudioSplitter extends JFrame {
                 frame.cleanOldFiles(DEFAULT_TRACK_FILE + "_");
                 frame.cleanOldFiles(OUTPUT_FOLDER + File.separator + DEFAULT_TRACK_FILE + "_");
                 frame.cleanOldFiles("temp_");
+                recordedFolder = "output";
                 Thread recorder = new Thread(new Recorder(frame));
                 recorder.start();
                 btnStart.setEnabled(false);
@@ -541,7 +547,7 @@ public class AudioSplitter extends JFrame {
         btnPlay = new JButton("Play");
         btnPlay.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = "audio-clean.wav";
+                String playTrack = "Full_Audio.wav";
                 playMusic(playTrack);
             }
         });
@@ -553,7 +559,7 @@ public class AudioSplitter extends JFrame {
         btnStopPlaying = new JButton("Stop Play");
         btnStopPlaying.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String playTrack = "audio-clean.wav";
+                String playTrack = "Full_Audio.wav";
                 playMusic(playTrack);
             }
         });
@@ -999,7 +1005,7 @@ public class AudioSplitter extends JFrame {
             try {
                 audioSplitter.setStatus("Reducing noise..");
                 NoiseReduction.runNoiseReduction();
-                File file = new File(DEFAULT_WAV_FILE2);
+                File file = new File(DEFAULT_WAV_FILE);
 //				File file = new File("C:\Users\User\Documents\Work\FYP\Tape Converter v2\Tape Converter v2\Full_Audio.wav");
                 AudioInputStream in = AudioSystem.getAudioInputStream(file);
                 AudioInputStream din = null;

@@ -330,7 +330,6 @@ public class ID3tags extends JFrame {
 
         textAlbum = new JTextField();
         textAlbum.setBounds(296, 66, 84, 30);
-        textAlbum.setText(v.getAlbumName());
         textAlbum.setFont(new Font("Arial", Font.PLAIN, 11));
         panelID3.add(textAlbum);
         textAlbum.setColumns(20);
@@ -402,7 +401,6 @@ public class ID3tags extends JFrame {
         textAlbum_2.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_2.setColumns(10);
         textAlbum_2.setBounds(296, 107, 84, 30);
-        textAlbum_2.setText(v.getAlbumName());
         panelID3.add(textAlbum_2);
 
         textYear_2 = new JTextField();
@@ -466,7 +464,6 @@ public class ID3tags extends JFrame {
         textAlbum_3.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_3.setColumns(10);
         textAlbum_3.setBounds(296, 148, 84, 30);
-        textAlbum_3.setText(v.getAlbumName());
         panelID3.add(textAlbum_3);
 
         textYear_3 = new JTextField();
@@ -530,7 +527,6 @@ public class ID3tags extends JFrame {
         textAlbum_4.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_4.setColumns(10);
         textAlbum_4.setBounds(296, 189, 84, 30);
-        textAlbum_4.setText(v.getAlbumName());
         panelID3.add(textAlbum_4);
 
         textYear_4 = new JTextField();
@@ -594,7 +590,6 @@ public class ID3tags extends JFrame {
         textAlbum_5.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_5.setColumns(10);
         textAlbum_5.setBounds(296, 230, 84, 30);
-        textAlbum_5.setText(v.getAlbumName());
         panelID3.add(textAlbum_5);
 
         textYear_5 = new JTextField();
@@ -658,7 +653,6 @@ public class ID3tags extends JFrame {
         textAlbum_6.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_6.setColumns(10);
         textAlbum_6.setBounds(296, 271, 84, 30);
-        textAlbum_6.setText(v.getAlbumName());
         panelID3.add(textAlbum_6);
 
         textYear_6 = new JTextField();
@@ -722,7 +716,6 @@ public class ID3tags extends JFrame {
         textAlbum_7.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_7.setColumns(10);
         textAlbum_7.setBounds(296, 312, 84, 30);
-        textAlbum_7.setText(v.getAlbumName());
         panelID3.add(textAlbum_7);
 
         textYear_7 = new JTextField();
@@ -786,7 +779,6 @@ public class ID3tags extends JFrame {
         textAlbum_8.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_8.setColumns(10);
         textAlbum_8.setBounds(296, 353, 84, 30);
-        textAlbum_8.setText(v.getAlbumName());
         panelID3.add(textAlbum_8);
 
         textYear_8 = new JTextField();
@@ -850,7 +842,6 @@ public class ID3tags extends JFrame {
         textAlbum_9.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_9.setColumns(10);
         textAlbum_9.setBounds(296, 394, 84, 30);
-        textAlbum_9.setText(v.getAlbumName());
         panelID3.add(textAlbum_9);
 
         textYear_9 = new JTextField();
@@ -914,7 +905,6 @@ public class ID3tags extends JFrame {
         textAlbum_10.setFont(new Font("Arial", Font.PLAIN, 11));
         textAlbum_10.setColumns(10);
         textAlbum_10.setBounds(296, 435, 84, 30);
-        textAlbum_10.setText(v.getAlbumName());
         panelID3.add(textAlbum_10);
 
         textYear_10 = new JTextField();
@@ -1529,9 +1519,10 @@ public class ID3tags extends JFrame {
                     for (trackPosition = 1; trackPosition <= trackQuantity - 1; trackPosition++) {
                         addID3tags(temp);
                         temp += 9;
+                        saveInfoFile();
                     }
                     //createInfoFile();
-                    saveInfoFile();
+                    readInfoFile();
 
                     //setID3tag(textTrackNumber.getText(),textArtist.getText(),textAlbum.getText(),textYear.getText(),textComposer.getText(),textPublisher.getText(),textOriginalArtist.getText(),textAlbumArtist.getText());
                     //if(firstTag == true){
@@ -1902,11 +1893,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist.getText());
-                String check = info[1];
-                String check2 = textTitle.getText();
-                System.out.println(info[1]);
-                System.out.println(textTitle.getText());
-                if (check != check2) {
+                if (!textTitle.getText().equals(info[1])) {
                     mp3file.save(recordedName + "/" + textTitle.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[1] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -1924,7 +1911,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_2.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_2.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_2.getText());
-                if (textTitle_2.getText() != info[10]) {
+                if (!textTitle_2.getText().equals(info[10])) {
                     mp3file.save(recordedName + "/" + textTitle_2.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[10] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -1942,7 +1929,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_3.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_3.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_3.getText());
-                if (textTitle_3.getText() != info[19]) {
+                if (!textTitle_3.getText().equals(info[19])) {
                     mp3file.save(recordedName + "/" + textTitle_3.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[19] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -1960,7 +1947,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_4.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_4.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_4.getText());
-                if (textTitle_2.getText() != info[28]) {
+                if (!textTitle_4.getText().equals(info[28])) {
                     mp3file.save(recordedName + "/" + textTitle_4.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[28] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -1978,7 +1965,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_5.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_5.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_5.getText());
-                if (textTitle_2.getText() != info[37]) {
+                if (!textTitle_5.getText().equals(info[37])) {
                     mp3file.save(recordedName + "/" + textTitle_5.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[37] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -1996,7 +1983,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_6.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_6.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_6.getText());
-                if (textTitle_2.getText() != info[46]) {
+                if (!textTitle_6.getText().equals(info[46])) {
                     mp3file.save(recordedName + "/" + textTitle_6.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[46] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -2014,7 +2001,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_7.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_7.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_7.getText());
-                if (textTitle_2.getText() != info[55]) {
+                if (!textTitle_7.getText().equals(info[55])) {
                     mp3file.save(recordedName + "/" + textTitle_7.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[55] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -2032,7 +2019,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_8.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_8.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_8.getText());
-                if (textTitle_2.getText() != info[64]) {
+                if (!textTitle_8.getText().equals(info[64])) {
                     mp3file.save(recordedName + "/" + textTitle_8.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[64] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -2050,7 +2037,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_9.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_9.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_9.getText());
-                if (textTitle_2.getText() != info[73]) {
+                if (!textTitle.getText().equals(info[73])) {
                     mp3file.save(recordedName + "/" + textTitle_9.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[73] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -2068,7 +2055,7 @@ public class ID3tags extends JFrame {
                 id3v2Tag.setPublisher(textPublisher_10.getText());
                 id3v2Tag.setOriginalArtist(textOriginalArtist_10.getText());
                 id3v2Tag.setAlbumArtist(textAlbumArtist_10.getText());
-                if (textTitle_2.getText() != info[82]) {
+                if (!textTitle_3.getText().equals(info[82])) {
                     mp3file.save(recordedName + "/" + textTitle_10.getText() + ".mp3");
                     File cleanFile = new File(recordedName + "\\" + info[82] + ".mp3");
                     boolean a = cleanFile.delete();
@@ -2611,52 +2598,42 @@ public class ID3tags extends JFrame {
 
                         case 1:
                         Track1 = info[1];
-                            System.out.println(Track1);
                         break;
 
                         case 2:
                         Track2 = info[10];
-                            System.out.println(Track2);
                         break;
 
                         case 3:
                         Track3 = info[19];
-                            System.out.println(Track3);
                         break;
 
                         case 4:
                             Track4 = info[28];
-                            System.out.println(Track3);
                             break;
 
                         case 5:
                             Track5 = info[37];
-                            System.out.println(Track3);
                             break;
 
                         case 6:
                             Track6 = info[46];
-                            System.out.println(Track3);
                             break;
 
                         case 7:
                             Track7 = info[55];
-                            System.out.println(Track3);
                             break;
 
                         case 8:
                             Track8 = info[64];
-                            System.out.println(Track3);
                             break;
 
                         case 9:
                             Track9 = info[73];
-                            System.out.println(Track3);
                             break;
 
                         case 10:
                             Track10 = info[82];
-                            System.out.println(Track3);
                             break;
                     }
                     }
