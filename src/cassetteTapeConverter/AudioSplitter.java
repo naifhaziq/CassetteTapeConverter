@@ -316,7 +316,7 @@ public class AudioSplitter extends JFrame {
         });
 
         subReprocess = new JMenuItem("Reprocess");
-        subReprocess.setEnabled(true);
+        subReprocess.setEnabled(false);
         final AudioSplitter frame = this;
         subReprocess.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -1005,7 +1005,7 @@ public class AudioSplitter extends JFrame {
             try {
                 audioSplitter.setStatus("Reducing noise..");
                 NoiseReduction.runNoiseReduction();
-                File file = new File(DEFAULT_WAV_FILE);
+                File file = new File(DEFAULT_WAV_FILE2);
 //				File file = new File("C:\Users\User\Documents\Work\FYP\Tape Converter v2\Tape Converter v2\Full_Audio.wav");
                 AudioInputStream in = AudioSystem.getAudioInputStream(file);
                 AudioInputStream din = null;
